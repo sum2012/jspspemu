@@ -1,14 +1,10 @@
-﻿///<reference path="../util/utils.ts" />
-///<reference path="./cpu/state.ts" />
-///<reference path="../cpu.ts" />
-var core;
-(function (core) {
+﻿define(["require", "exports"], function(require, exports) {
     var NativeFunction = (function () {
         function NativeFunction() {
         }
         return NativeFunction;
     })();
-    core.NativeFunction = NativeFunction;
+    exports.NativeFunction = NativeFunction;
 
     var SyscallManager = (function () {
         function SyscallManager(context) {
@@ -35,6 +31,6 @@ var core;
         };
         return SyscallManager;
     })();
-    core.SyscallManager = SyscallManager;
-})(core || (core = {}));
+    exports.SyscallManager = SyscallManager;
+});
 //# sourceMappingURL=syscallmanager.js.map

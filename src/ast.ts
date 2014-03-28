@@ -1,4 +1,4 @@
-﻿class ANode {
+﻿export class ANode {
     toJs() {
     }
 
@@ -7,10 +7,10 @@
     }
 }
 
-class ANodeStm extends ANode {
+export class ANodeStm extends ANode {
 }
 
-class ANodeStmList extends ANodeStm {
+export class ANodeStmList extends ANodeStm {
     constructor(public childs: ANodeStm[]) {
         super();
     }
@@ -20,7 +20,7 @@ class ANodeStmList extends ANodeStm {
     }
 }
 
-class ANodeStmRaw extends ANodeStm {
+export class ANodeStmRaw extends ANodeStm {
     constructor(public content: string) {
         super();
     }
@@ -30,7 +30,7 @@ class ANodeStmRaw extends ANodeStm {
     }
 }
 
-class ANodeStmExpr extends ANodeStm {
+export class ANodeStmExpr extends ANodeStm {
     constructor(public expr: ANodeExpr) {
         super();
     }
@@ -40,14 +40,14 @@ class ANodeStmExpr extends ANodeStm {
     }
 }
 
-class ANodeExpr extends ANode {
+export class ANodeExpr extends ANode {
 
 }
 
-class ANodeExprLValue extends ANodeExpr {
+export class ANodeExprLValue extends ANodeExpr {
 }
 
-class ANodeExprLValueVar extends ANodeExprLValue {
+export class ANodeExprLValueVar extends ANodeExprLValue {
     constructor(public name: string) {
         super();
     }
@@ -57,7 +57,7 @@ class ANodeExprLValueVar extends ANodeExprLValue {
     }
 }
 
-class ANodeExprI32 extends ANodeExpr {
+export class ANodeExprI32 extends ANodeExpr {
     constructor(public value: number) {
         super();
     }
@@ -67,7 +67,7 @@ class ANodeExprI32 extends ANodeExpr {
     }
 }
 
-class ANodeExprU32 extends ANodeExpr {
+export class ANodeExprU32 extends ANodeExpr {
     constructor(public value: number) {
         super();
     }
@@ -77,7 +77,7 @@ class ANodeExprU32 extends ANodeExpr {
     }
 }
 
-class ANodeExprBinop extends ANodeExpr {
+export class ANodeExprBinop extends ANodeExpr {
     constructor(public left: ANodeExpr, public op: string, public right: ANodeExpr) {
         super();
     }
@@ -87,7 +87,7 @@ class ANodeExprBinop extends ANodeExpr {
     }
 }
 
-class ANodeExprUnop extends ANodeExpr {
+export class ANodeExprUnop extends ANodeExpr {
     constructor(public op: string, public right: ANodeExpr) {
         super();
     }
@@ -97,7 +97,7 @@ class ANodeExprUnop extends ANodeExpr {
     }
 }
 
-class ANodeExprAssign extends ANodeExpr {
+export class ANodeExprAssign extends ANodeExpr {
     constructor(public left: ANodeExprLValue, public right: ANodeExpr) {
         super();
     }
@@ -107,7 +107,7 @@ class ANodeExprAssign extends ANodeExpr {
     }
 }
 
-class ANodeExprCall extends ANodeExpr {
+export class ANodeExprCall extends ANodeExpr {
     constructor(public name: string, public arguments: ANodeExpr[]) {
         super();
     }
@@ -117,7 +117,7 @@ class ANodeExprCall extends ANodeExpr {
     }
 }
 
-class ANodeStmIf extends ANodeStm {
+export class ANodeStmIf extends ANodeStm {
     constructor(public cond: ANodeExpr, public codeTrue: ANodeStm, public codeFalse?: ANodeStm) {
         super();
     }
@@ -131,7 +131,7 @@ class ANodeStmIf extends ANodeStm {
     }
 }
 
-class AstBuilder {
+export class AstBuilder {
     assign(ref: ANodeExprLValue, value: ANodeExpr) {
         return new ANodeExprAssign(ref, value);
     }
@@ -178,7 +178,7 @@ class AstBuilder {
     }
 }
 
-class MipsAstBuilder extends AstBuilder {
+export class MipsAstBuilder extends AstBuilder {
 	debugger():ANodeStm {
 		return new ANodeStmRaw("debugger;");
 	}
@@ -190,12 +190,12 @@ class MipsAstBuilder extends AstBuilder {
 
     gpr(index: number): ANodeExprLValueVar {
         if (index === 0) return new ANodeExprLValueVar('0');
-		return new ANodeExprLValueVar('state.' + core.cpu.CpuState.getGprAccessName(index));
+		return new ANodeExprLValueVar('state.gpr[' + index + ']');
         
     }
 
     fpr(index: number): ANodeExprLValueVar {
-		return new ANodeExprLValueVar('state.' + core.cpu.CpuState.getFprAccessName(index));
+		return new ANodeExprLValueVar('state.fpr[' + index + ']');
     }
 
     fpr_i(index: number): ANodeExprLValueVar {

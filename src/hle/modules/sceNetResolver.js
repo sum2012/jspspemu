@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceNetResolver = (function () {
-            function sceNetResolver(context) {
-                this.context = context;
-            }
-            return sceNetResolver;
-        })();
-        modules.sceNetResolver = sceNetResolver;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceNetResolver = (function () {
+        function sceNetResolver(context) {
+            this.context = context;
+        }
+        return sceNetResolver;
+    })();
+    exports.sceNetResolver = sceNetResolver;
+});
 //# sourceMappingURL=sceNetResolver.js.map

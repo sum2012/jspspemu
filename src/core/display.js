@@ -4,8 +4,7 @@
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var core;
-(function (core) {
+define(["require", "exports", './memory'], function(require, exports, Memory) {
     (function (PixelFormat) {
         PixelFormat[PixelFormat["NONE"] = -1] = "NONE";
         PixelFormat[PixelFormat["RGBA_5650"] = 0] = "RGBA_5650";
@@ -19,19 +18,19 @@ var core;
         PixelFormat[PixelFormat["COMPRESSED_DXT1"] = 8] = "COMPRESSED_DXT1";
         PixelFormat[PixelFormat["COMPRESSED_DXT3"] = 9] = "COMPRESSED_DXT3";
         PixelFormat[PixelFormat["COMPRESSED_DXT5"] = 10] = "COMPRESSED_DXT5";
-    })(core.PixelFormat || (core.PixelFormat = {}));
-    var PixelFormat = core.PixelFormat;
+    })(exports.PixelFormat || (exports.PixelFormat = {}));
+    var PixelFormat = exports.PixelFormat;
 
     var BasePspDisplay = (function () {
         function BasePspDisplay() {
-            this.address = core.Memory.DEFAULT_FRAME_ADDRESS;
+            this.address = Memory.DEFAULT_FRAME_ADDRESS;
             this.bufferWidth = 512;
             this.pixelFormat = 3 /* RGBA_8888 */;
             this.sync = 1;
         }
         return BasePspDisplay;
     })();
-    core.BasePspDisplay = BasePspDisplay;
+    exports.BasePspDisplay = BasePspDisplay;
 
     var DummyPspDisplay = (function (_super) {
         __extends(DummyPspDisplay, _super);
@@ -54,7 +53,7 @@ var core;
         };
         return DummyPspDisplay;
     })(BasePspDisplay);
-    core.DummyPspDisplay = DummyPspDisplay;
+    exports.DummyPspDisplay = DummyPspDisplay;
 
     var PspDisplay = (function (_super) {
         __extends(PspDisplay, _super);
@@ -111,7 +110,7 @@ var core;
         };
         return PspDisplay;
     })(BasePspDisplay);
-    core.PspDisplay = PspDisplay;
+    exports.PspDisplay = PspDisplay;
 
     var PixelConverter = (function () {
         function PixelConverter() {
@@ -124,22 +123,22 @@ var core;
             if (typeof clutMask === "undefined") { clutMask = 0; }
             switch (format) {
                 case 3 /* RGBA_8888 */:
-                    PixelConverter.decode8888(new Uint8Array(from), (fromIndex >>> 0) & core.Memory.MASK, to, toIndex, count, useAlpha);
+                    PixelConverter.decode8888(new Uint8Array(from), (fromIndex >>> 0) & Memory.MASK, to, toIndex, count, useAlpha);
                     break;
                 case 1 /* RGBA_5551 */:
-                    PixelConverter.update5551(new Uint16Array(from), (fromIndex >>> 1) & core.Memory.MASK, to, toIndex, count, useAlpha);
+                    PixelConverter.update5551(new Uint16Array(from), (fromIndex >>> 1) & Memory.MASK, to, toIndex, count, useAlpha);
                     break;
                 case 0 /* RGBA_5650 */:
-                    PixelConverter.update5650(new Uint16Array(from), (fromIndex >>> 1) & core.Memory.MASK, to, toIndex, count, useAlpha);
+                    PixelConverter.update5650(new Uint16Array(from), (fromIndex >>> 1) & Memory.MASK, to, toIndex, count, useAlpha);
                     break;
                 case 2 /* RGBA_4444 */:
-                    PixelConverter.update4444(new Uint16Array(from), (fromIndex >>> 1) & core.Memory.MASK, to, toIndex, count, useAlpha);
+                    PixelConverter.update4444(new Uint16Array(from), (fromIndex >>> 1) & Memory.MASK, to, toIndex, count, useAlpha);
                     break;
                 case 5 /* PALETTE_T8 */:
-                    PixelConverter.updateT8(new Uint8Array(from), (fromIndex >>> 0) & core.Memory.MASK, to, toIndex, count, useAlpha, palette, clutStart, clutShift, clutMask);
+                    PixelConverter.updateT8(new Uint8Array(from), (fromIndex >>> 0) & Memory.MASK, to, toIndex, count, useAlpha, palette, clutStart, clutShift, clutMask);
                     break;
                 case 4 /* PALETTE_T4 */:
-                    PixelConverter.updateT4(new Uint8Array(from), (fromIndex >>> 0) & core.Memory.MASK, to, toIndex, count, useAlpha, palette, clutStart, clutShift, clutMask);
+                    PixelConverter.updateT4(new Uint8Array(from), (fromIndex >>> 0) & Memory.MASK, to, toIndex, count, useAlpha, palette, clutStart, clutShift, clutMask);
                     break;
                 default:
                     throw (new Error(sprintf("Unsupported pixel format %d", format)));
@@ -227,6 +226,6 @@ var core;
         };
         return PixelConverter;
     })();
-    core.PixelConverter = PixelConverter;
-})(core || (core = {}));
+    exports.PixelConverter = PixelConverter;
+});
 //# sourceMappingURL=display.js.map

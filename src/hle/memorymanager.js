@@ -1,12 +1,11 @@
-﻿var hle;
-(function (hle) {
-    var MemoryPartitions;
+﻿define(["require", "exports"], function(require, exports) {
     (function (MemoryPartitions) {
         MemoryPartitions[MemoryPartitions["Kernel0"] = 0] = "Kernel0";
         MemoryPartitions[MemoryPartitions["User"] = 2] = "User";
         MemoryPartitions[MemoryPartitions["VolatilePartition"] = 5] = "VolatilePartition";
         MemoryPartitions[MemoryPartitions["UserStacks"] = 6] = "UserStacks";
-    })(MemoryPartitions || (MemoryPartitions = {}));
+    })(exports.MemoryPartitions || (exports.MemoryPartitions = {}));
+    var MemoryPartitions = exports.MemoryPartitions;
 
     (function (MemoryAnchor) {
         MemoryAnchor[MemoryAnchor["Low"] = 0] = "Low";
@@ -14,8 +13,8 @@
         MemoryAnchor[MemoryAnchor["Address"] = 2] = "Address";
         MemoryAnchor[MemoryAnchor["LowAligned"] = 3] = "LowAligned";
         MemoryAnchor[MemoryAnchor["HighAligned"] = 4] = "HighAligned";
-    })(hle.MemoryAnchor || (hle.MemoryAnchor = {}));
-    var MemoryAnchor = hle.MemoryAnchor;
+    })(exports.MemoryAnchor || (exports.MemoryAnchor = {}));
+    var MemoryAnchor = exports.MemoryAnchor;
 
     var MemoryPartition = (function () {
         function MemoryPartition(name, low, high, allocated, parent) {
@@ -208,7 +207,7 @@
         };
         return MemoryPartition;
     })();
-    hle.MemoryPartition = MemoryPartition;
+    exports.MemoryPartition = MemoryPartition;
 
     var MemoryManager = (function () {
         function MemoryManager() {
@@ -239,6 +238,6 @@
         });
         return MemoryManager;
     })();
-    hle.MemoryManager = MemoryManager;
-})(hle || (hle = {}));
+    exports.MemoryManager = MemoryManager;
+});
 //# sourceMappingURL=memorymanager.js.map

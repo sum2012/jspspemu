@@ -1,6 +1,4 @@
-﻿///<reference path="../util/utils.ts" />
-var core;
-(function (core) {
+﻿define(["require", "exports"], function(require, exports) {
     var Memory = (function () {
         function Memory() {
             this.buffer = new ArrayBuffer(0x10000000);
@@ -123,6 +121,8 @@ var core;
         Memory.MAIN_OFFSET = 0x08000000;
         return Memory;
     })();
-    core.Memory = Memory;
-})(core || (core = {}));
+
+    
+    return Memory;
+});
 //# sourceMappingURL=memory.js.map

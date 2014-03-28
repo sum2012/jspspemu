@@ -1,34 +1,35 @@
-﻿module hle.modules {
-	export class sceUtility {
-		constructor(private context: EmulatorContext) { }
+﻿import EmulatorContext = require('../../context');
+import utils = require('../utils');
+import createNativeFunction = utils.createNativeFunction;
 
-		private currentStep: DialogStepEnum = DialogStepEnum.NONE;
+export class sceUtility {
+	constructor(private context: EmulatorContext) { }
 
-		sceUtilitySavedataInitStart = createNativeFunction(0x50C4CD57, 150, 'uint', 'void*', this, (paramsPtr: Stream) => {
-			this.currentStep = DialogStepEnum.SUCCESS;
-			return 0;
-		});
+	private currentStep: DialogStepEnum = DialogStepEnum.NONE;
 
-		sceUtilitySavedataShutdownStart = createNativeFunction(0x9790B33C, 150, 'uint', '', this, () => {
-			this.currentStep = DialogStepEnum.SHUTDOWN;
-			return 0;
-		});
+	sceUtilitySavedataInitStart = createNativeFunction(0x50C4CD57, 150, 'uint', 'void*', this, (paramsPtr: Stream) => {
+		this.currentStep = DialogStepEnum.SUCCESS;
+		return 0;
+	});
 
-		sceUtilitySavedataGetStatus = createNativeFunction(0x8874DBE0, 150, 'uint', '', this, () => {
-			try {
-				return this.currentStep;
-			} finally {
-				if (this.currentStep == DialogStepEnum.SHUTDOWN) this.currentStep = DialogStepEnum.NONE;
-			}
-		});
-	}
+	sceUtilitySavedataShutdownStart = createNativeFunction(0x9790B33C, 150, 'uint', '', this, () => {
+		this.currentStep = DialogStepEnum.SHUTDOWN;
+		return 0;
+	});
 
-	enum DialogStepEnum {
-		NONE = 0,
-		INIT = 1,
-		PROCESSING = 2,
-		SUCCESS = 3,
-		SHUTDOWN = 4,
-	}
+	sceUtilitySavedataGetStatus = createNativeFunction(0x8874DBE0, 150, 'uint', '', this, () => {
+		try {
+			return this.currentStep;
+		} finally {
+			if (this.currentStep == DialogStepEnum.SHUTDOWN) this.currentStep = DialogStepEnum.NONE;
+		}
+	});
+}
 
+enum DialogStepEnum {
+	NONE = 0,
+	INIT = 1,
+	PROCESSING = 2,
+	SUCCESS = 3,
+	SHUTDOWN = 4,
 }

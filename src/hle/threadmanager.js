@@ -1,5 +1,8 @@
-﻿var hle;
-(function (hle) {
+﻿define(["require", "exports", '../core/cpu'], function(require, exports, core_cpu) {
+    var CpuState = core_cpu.CpuState;
+    var ProgramExecutor = core_cpu.ProgramExecutor;
+    var InstructionCache = core_cpu.InstructionCache;
+
     var Thread = (function () {
         function Thread(manager, state, instructionCache) {
             this.manager = manager;
@@ -61,7 +64,7 @@
         };
         return Thread;
     })();
-    hle.Thread = Thread;
+    exports.Thread = Thread;
 
     var ThreadManager = (function () {
         function ThreadManager(memory, memoryManager, display, syscallManager, instructionCache) {
@@ -77,7 +80,7 @@
         }
         ThreadManager.prototype.create = function (name, entryPoint, initialPriority, stackSize) {
             if (typeof stackSize === "undefined") { stackSize = 0x1000; }
-            var thread = new Thread(this, new core.cpu.CpuState(this.memory, this.syscallManager), this.instructionCache);
+            var thread = new Thread(this, new CpuState(this.memory, this.syscallManager), this.instructionCache);
             thread.name = name;
             thread.state.PC = entryPoint;
             thread.state.RA = 268435455 /* EXIT_THREAD */;
@@ -177,6 +180,6 @@
         };
         return ThreadManager;
     })();
-    hle.ThreadManager = ThreadManager;
-})(hle || (hle = {}));
+    exports.ThreadManager = ThreadManager;
+});
 //# sourceMappingURL=threadmanager.js.map

@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceNetAdhoc = (function () {
-            function sceNetAdhoc(context) {
-                this.context = context;
-            }
-            return sceNetAdhoc;
-        })();
-        modules.sceNetAdhoc = sceNetAdhoc;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceNetAdhoc = (function () {
+        function sceNetAdhoc(context) {
+            this.context = context;
+        }
+        return sceNetAdhoc;
+    })();
+    exports.sceNetAdhoc = sceNetAdhoc;
+});
 //# sourceMappingURL=sceNetAdhoc.js.map

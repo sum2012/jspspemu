@@ -1,5 +1,4 @@
-﻿var hle;
-(function (hle) {
+﻿define(["require", "exports"], function(require, exports) {
     var Device = (function () {
         function Device(name, vfs) {
             this.name = name;
@@ -12,7 +11,7 @@
         };
         return Device;
     })();
-    hle.Device = Device;
+    exports.Device = Device;
 
     var HleFile = (function () {
         function HleFile(entry) {
@@ -24,7 +23,7 @@
         };
         return HleFile;
     })();
-    hle.HleFile = HleFile;
+    exports.HleFile = HleFile;
 
     var Uri = (function () {
         function Uri(path) {
@@ -61,7 +60,7 @@
         };
         return Uri;
     })();
-    hle.Uri = Uri;
+    exports.Uri = Uri;
 
     var FileManager = (function () {
         function FileManager() {
@@ -90,6 +89,6 @@
         };
         return FileManager;
     })();
-    hle.FileManager = FileManager;
-})(hle || (hle = {}));
+    exports.FileManager = FileManager;
+});
 //# sourceMappingURL=filemanager.js.map

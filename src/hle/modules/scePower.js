@@ -1,23 +1,21 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var scePower = (function () {
-            function scePower(context) {
-                var _this = this;
-                this.context = context;
-                this.cpuFreq = 222;
-                this.scePowerGetCpuClockFrequencyInt = hle.modules.createNativeFunction(0xFDB5BFE9, 150, 'int', '', this, function () {
-                    return _this.cpuFreq;
-                });
-                this.scePowerRegisterCallback = hle.modules.createNativeFunction(0x04B7766E, 150, 'int', '', this, function (slotIndex, callbackId) {
-                    console.warn("Not implemented scePowerRegisterCallback");
-                    return 0;
-                });
-            }
-            return scePower;
-        })();
-        modules.scePower = scePower;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports", '../utils'], function(require, exports, utils) {
+    var createNativeFunction = utils.createNativeFunction;
+
+    var scePower = (function () {
+        function scePower(context) {
+            var _this = this;
+            this.context = context;
+            this.cpuFreq = 222;
+            this.scePowerGetCpuClockFrequencyInt = createNativeFunction(0xFDB5BFE9, 150, 'int', '', this, function () {
+                return _this.cpuFreq;
+            });
+            this.scePowerRegisterCallback = createNativeFunction(0x04B7766E, 150, 'int', '', this, function (slotIndex, callbackId) {
+                console.warn("Not implemented scePowerRegisterCallback");
+                return 0;
+            });
+        }
+        return scePower;
+    })();
+    exports.scePower = scePower;
+});
 //# sourceMappingURL=scePower.js.map

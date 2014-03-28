@@ -1,11 +1,13 @@
-﻿module hle.modules {
-	export class sceImpose {
-		constructor(private context: EmulatorContext) { }
+﻿import EmulatorContext = require('../../context');
+import utils = require('../utils');
+import createNativeFunction = utils.createNativeFunction;
 
-		sceImposeGetBatteryIconStatus = createNativeFunction(0x8C943191, 150, 'uint', 'void*/void*', this, (isChargingPointer: Stream, iconStatusPointer: Stream) => {
-			isChargingPointer.writeInt32(0);
-			iconStatusPointer.writeInt32(0);
-			return 0;
-		});
-	}
+export class sceImpose {
+	constructor(private context: EmulatorContext) { }
+
+	sceImposeGetBatteryIconStatus = createNativeFunction(0x8C943191, 150, 'uint', 'void*/void*', this, (isChargingPointer: Stream, iconStatusPointer: Stream) => {
+		isChargingPointer.writeInt32(0);
+		iconStatusPointer.writeInt32(0);
+		return 0;
+	});
 }

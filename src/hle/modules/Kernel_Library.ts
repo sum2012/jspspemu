@@ -1,15 +1,17 @@
-﻿module hle.modules {
-	export class Kernel_Library {
-		constructor(private context: EmulatorContext) { }
+﻿import EmulatorContext = require('../../context');
+import utils = require('../utils');
+import createNativeFunction = utils.createNativeFunction;
 
-		sceKernelCpuSuspendIntr = createNativeFunction(0x092968F4, 150, 'uint', '', this, () => {
-			console.warn(sprintf("sceKernelCpuSuspendIntr not implemented"));
-			return 0;
-		});
+export class Kernel_Library {
+	constructor(private context: EmulatorContext) { }
 
-		sceKernelCpuResumeIntr = createNativeFunction(0x5F10D406, 150, 'uint', '', this, (flags: number) => {
-			console.warn(sprintf("sceKernelCpuResumeIntr not implemented"));
-			return 0;
-		});
-	}
+	sceKernelCpuSuspendIntr = createNativeFunction(0x092968F4, 150, 'uint', '', this, () => {
+		console.warn(sprintf("sceKernelCpuSuspendIntr not implemented"));
+		return 0;
+	});
+
+	sceKernelCpuResumeIntr = createNativeFunction(0x5F10D406, 150, 'uint', '', this, (flags: number) => {
+		console.warn(sprintf("sceKernelCpuResumeIntr not implemented"));
+		return 0;
+	});
 }

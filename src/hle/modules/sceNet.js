@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceNet = (function () {
-            function sceNet(context) {
-                this.context = context;
-            }
-            return sceNet;
-        })();
-        modules.sceNet = sceNet;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceNet = (function () {
+        function sceNet(context) {
+            this.context = context;
+        }
+        return sceNet;
+    })();
+    exports.sceNet = sceNet;
+});
 //# sourceMappingURL=sceNet.js.map

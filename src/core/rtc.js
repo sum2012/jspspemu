@@ -1,6 +1,4 @@
-﻿///<reference path="../util/utils.ts" />
-var core;
-(function (core) {
+﻿define(["require", "exports"], function(require, exports) {
     var PspRtc = (function () {
         function PspRtc() {
         }
@@ -9,5 +7,8 @@ var core;
         };
         return PspRtc;
     })();
-})(core || (core = {}));
+
+    
+    return PspRtc;
+});
 //# sourceMappingURL=rtc.js.map

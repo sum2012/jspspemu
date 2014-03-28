@@ -1,6 +1,4 @@
-﻿///<reference path="../util/utils.ts" />
-var core;
-(function (core) {
+﻿define(["require", "exports"], function(require, exports) {
     var PspAudioBuffer = (function () {
         function PspAudioBuffer(readedCallback, data) {
             this.readedCallback = readedCallback;
@@ -41,7 +39,7 @@ var core;
         });
         return PspAudioBuffer;
     })();
-    core.PspAudioBuffer = PspAudioBuffer;
+    exports.PspAudioBuffer = PspAudioBuffer;
 
     var PspAudioChannel = (function () {
         function PspAudioChannel(audio, context) {
@@ -103,7 +101,7 @@ var core;
         };
         return PspAudioChannel;
     })();
-    core.PspAudioChannel = PspAudioChannel;
+    exports.PspAudioChannel = PspAudioChannel;
 
     var PspAudio = (function () {
         function PspAudio() {
@@ -136,6 +134,6 @@ var core;
         };
         return PspAudio;
     })();
-    core.PspAudio = PspAudio;
-})(core || (core = {}));
+    exports.PspAudio = PspAudio;
+});
 //# sourceMappingURL=audio.js.map

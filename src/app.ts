@@ -1,8 +1,22 @@
-﻿///<reference path="./cpu.ts" />
+﻿import ast = require('./ast');
+import cpu = require('./core/cpu');
+import Memory = require('./core/memory');
+import EmulatorContext = require('./context');
+import controller = require('./core/controller');
+import format = require('./format/format');
+import detectFormatAsync = format.detectFormatAsync;
+
+import Cso = require('./format/cso');
+import Pbp = require('./format/pbp');
+import _Iso = require('./format/iso');
+
+import Iso = _Iso.Iso;
+
+import PspCtrlButtons = controller.PspCtrlButtons;
 
 class Emulator {
 	private emulatorContext: EmulatorContext;
-	private memory: core.Memory;
+	private memory: Memory;
 	private memoryManager: hle.MemoryManager;
 	private fileManager: hle.FileManager;
 	private audio: core.PspAudio;
@@ -17,7 +31,7 @@ class Emulator {
 	private moduleManager: hle.ModuleManager;
 
 	constructor() {
-		this.memory = new core.Memory();
+		this.memory = new Memory();
 	}
 
 	stopAsync() {
@@ -70,14 +84,14 @@ class Emulator {
 			console.info(sprintf('File:: size: %d, format: "%s", name: "%s"', asyncStream.size, fileFormat, asyncStream.name));
 			switch (fileFormat) {
 				case 'ciso':
-					return format.cso.Cso.fromStreamAsync(asyncStream).then(asyncStream2 => this._loadAsync(asyncStream2, pathToFile));
+					return Cso.fromStreamAsync(asyncStream).then(asyncStream2 => this._loadAsync(asyncStream2, pathToFile));
 				case 'pbp':
 					return asyncStream.readChunkAsync(0, asyncStream.size).then(executableArrayBuffer => {
-						var pbp = format.pbp.Pbp.fromStream(Stream.fromArrayBuffer(executableArrayBuffer));
+						var pbp = Pbp.fromStream(Stream.fromArrayBuffer(executableArrayBuffer));
 						return this._loadAsync(new MemoryAsyncStream(pbp.get('psp.data').toArrayBuffer()), pathToFile);
 					});
 				case 'iso':
-					return format.iso.Iso.fromStreamAsync(asyncStream).then(iso => {
+					return Iso.fromStreamAsync(asyncStream).then(iso => {
 						var isoFs = new hle.vfs.IsoVfs(iso);
 						this.fileManager.mount('umd0', isoFs);
 						this.fileManager.mount('disc0', isoFs);
@@ -165,26 +179,26 @@ function controllerRegister() {
 		;
 	}
 
-	createButton('#button_left', core.PspCtrlButtons.left);
-	createButton('#button_up', core.PspCtrlButtons.up);
-	createButton('#button_down', core.PspCtrlButtons.down);
-	createButton('#button_right', core.PspCtrlButtons.right);
+	createButton('#button_left', PspCtrlButtons.left);
+	createButton('#button_up', PspCtrlButtons.up);
+	createButton('#button_down', PspCtrlButtons.down);
+	createButton('#button_right', PspCtrlButtons.right);
 
-	createButton('#button_up_left', core.PspCtrlButtons.up | core.PspCtrlButtons.left);
-	createButton('#button_up_right', core.PspCtrlButtons.up | core.PspCtrlButtons.right);
-	createButton('#button_down_left', core.PspCtrlButtons.down | core.PspCtrlButtons.left);
-	createButton('#button_down_right', core.PspCtrlButtons.down | core.PspCtrlButtons.right);
+	createButton('#button_up_left', PspCtrlButtons.up | PspCtrlButtons.left);
+	createButton('#button_up_right', PspCtrlButtons.up | PspCtrlButtons.right);
+	createButton('#button_down_left', PspCtrlButtons.down | PspCtrlButtons.left);
+	createButton('#button_down_right', PspCtrlButtons.down | PspCtrlButtons.right);
 
-	createButton('#button_cross', core.PspCtrlButtons.cross);
-	createButton('#button_circle', core.PspCtrlButtons.circle);
-	createButton('#button_triangle', core.PspCtrlButtons.triangle);
-	createButton('#button_square', core.PspCtrlButtons.square);
+	createButton('#button_cross', PspCtrlButtons.cross);
+	createButton('#button_circle', PspCtrlButtons.circle);
+	createButton('#button_triangle', PspCtrlButtons.triangle);
+	createButton('#button_square', PspCtrlButtons.square);
 
-	createButton('#button_l', core.PspCtrlButtons.leftTrigger);
-	createButton('#button_r', core.PspCtrlButtons.rightTrigger);
+	createButton('#button_l', PspCtrlButtons.leftTrigger);
+	createButton('#button_r', PspCtrlButtons.rightTrigger);
 
-	createButton('#button_start', core.PspCtrlButtons.start);
-	createButton('#button_select', core.PspCtrlButtons.select);
+	createButton('#button_start', PspCtrlButtons.start);
+	createButton('#button_select', PspCtrlButtons.select);
 
 	//document['ontouchmove'] = (e) => { e.preventDefault(); };
 
@@ -193,7 +207,7 @@ function controllerRegister() {
 
 var emulator = new Emulator();
 
-function main() {
+export function main() {
 	var sampleDemo = '';
 
 	if (document.location.hash) {
@@ -206,3 +220,4 @@ function main() {
 }
 
 main();
+

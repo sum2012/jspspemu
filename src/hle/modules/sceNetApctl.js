@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceNetApctl = (function () {
-            function sceNetApctl(context) {
-                this.context = context;
-            }
-            return sceNetApctl;
-        })();
-        modules.sceNetApctl = sceNetApctl;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceNetApctl = (function () {
+        function sceNetApctl(context) {
+            this.context = context;
+        }
+        return sceNetApctl;
+    })();
+    exports.sceNetApctl = sceNetApctl;
+});
 //# sourceMappingURL=sceNetApctl.js.map

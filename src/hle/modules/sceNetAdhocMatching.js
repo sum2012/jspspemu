@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceNetAdhocMatching = (function () {
-            function sceNetAdhocMatching(context) {
-                this.context = context;
-            }
-            return sceNetAdhocMatching;
-        })();
-        modules.sceNetAdhocMatching = sceNetAdhocMatching;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceNetAdhocMatching = (function () {
+        function sceNetAdhocMatching(context) {
+            this.context = context;
+        }
+        return sceNetAdhocMatching;
+    })();
+    exports.sceNetAdhocMatching = sceNetAdhocMatching;
+});
 //# sourceMappingURL=sceNetAdhocMatching.js.map

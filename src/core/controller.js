@@ -1,6 +1,4 @@
-﻿///<reference path="../util/utils.ts" />
-var core;
-(function (core) {
+﻿define(["require", "exports", '../util/struct'], function(require, exports, struct) {
     var SceCtrlData = (function () {
         function SceCtrlData() {
             this.timeStamp = 0;
@@ -33,16 +31,16 @@ var core;
         });
 
 
-        SceCtrlData.struct = StructClass.create(SceCtrlData, [
-            { type: UInt32, name: 'timeStamp' },
-            { type: UInt32, name: 'buttons' },
-            { type: Int8, name: 'lx' },
-            { type: Int8, name: 'ly' },
-            { type: StructArray.create(Int8, 6), name: '_rsrv' }
+        SceCtrlData.struct = struct.StructClass.create(SceCtrlData, [
+            { type: struct.UInt32, name: 'timeStamp' },
+            { type: struct.UInt32, name: 'buttons' },
+            { type: struct.Int8, name: 'lx' },
+            { type: struct.Int8, name: 'ly' },
+            { type: struct.StructArray.create(struct.Int8, 6), name: '_rsrv' }
         ]);
         return SceCtrlData;
     })();
-    core.SceCtrlData = SceCtrlData;
+    exports.SceCtrlData = SceCtrlData;
 
     var PspController = (function () {
         function PspController() {
@@ -112,7 +110,7 @@ var core;
         };
         return PspController;
     })();
-    core.PspController = PspController;
+    exports.PspController = PspController;
 
     (function (PspCtrlButtons) {
         PspCtrlButtons[PspCtrlButtons["none"] = 0x0000000] = "none";
@@ -138,8 +136,8 @@ var core;
         PspCtrlButtons[PspCtrlButtons["note"] = 0x0800000] = "note";
         PspCtrlButtons[PspCtrlButtons["discPresent"] = 0x1000000] = "discPresent";
         PspCtrlButtons[PspCtrlButtons["memoryStickPresent"] = 0x2000000] = "memoryStickPresent";
-    })(core.PspCtrlButtons || (core.PspCtrlButtons = {}));
-    var PspCtrlButtons = core.PspCtrlButtons;
+    })(exports.PspCtrlButtons || (exports.PspCtrlButtons = {}));
+    var PspCtrlButtons = exports.PspCtrlButtons;
 
     (function (HtmlKeyCodes) {
         HtmlKeyCodes[HtmlKeyCodes["backspace"] = 8] = "backspace";
@@ -241,7 +239,7 @@ var core;
         HtmlKeyCodes[HtmlKeyCodes["back_slash"] = 220] = "back_slash";
         HtmlKeyCodes[HtmlKeyCodes["close_braket"] = 221] = "close_braket";
         HtmlKeyCodes[HtmlKeyCodes["single_quote"] = 222] = "single_quote";
-    })(core.HtmlKeyCodes || (core.HtmlKeyCodes = {}));
-    var HtmlKeyCodes = core.HtmlKeyCodes;
-})(core || (core = {}));
+    })(exports.HtmlKeyCodes || (exports.HtmlKeyCodes = {}));
+    var HtmlKeyCodes = exports.HtmlKeyCodes;
+});
 //# sourceMappingURL=controller.js.map

@@ -1,71 +1,71 @@
-﻿module hle {
-	export class Device {
-		cwd: string = '';
+﻿import vfs = require('./vfs');
 
-		constructor(public name: string, public vfs: hle.vfs.Vfs) {
-		}
+export class Device {
+	cwd: string = '';
 
-		open(uri: Uri, flags: hle.vfs.FileOpenFlags, mode: hle.vfs.FileMode) {
-			var entry = this.vfs.open(uri.pathWithoutDevice, flags, mode);
-			return entry;
-		}
+	constructor(public name: string, public vfs: vfs.Vfs) {
 	}
 
-	export class HleFile {
-		cursor = 0;
+	open(uri: Uri, flags: vfs.FileOpenFlags, mode: vfs.FileMode) {
+		var entry = this.vfs.open(uri.pathWithoutDevice, flags, mode);
+		return entry;
+	}
+}
 
-		constructor(public entry: vfs.VfsEntry) {
-		}
+export class HleFile {
+	cursor = 0;
 
-		close() {
-			this.entry.close();
-		}
+	constructor(public entry: vfs.VfsEntry) {
 	}
 
-	export class Uri {
-		constructor(public path: string) {
-		}
+	close() {
+		this.entry.close();
+	}
+}
 
-		get device() {
-			return (this.path.split(':'))[0];
-		}
-
-		get pathWithoutDevice() {
-			return (this.path.split(':'))[1];
-		}
-
-		get isAbsolute() {
-			return this.path.contains(':');
-		}
-
-		append(that: Uri) {
-			if (that.isAbsolute) return that;
-			return new Uri(this.path + '/' + that.path);
-		}
+export class Uri {
+	constructor(public path: string) {
 	}
 
-	export class FileManager {
-		private devices: StringDictionary<Device> = {};
-		cwd: Uri = new Uri('');
+	get device() {
+		return (this.path.split(':'))[0];
+	}
 
-		chdir(cwd:string) {
-			this.cwd = new Uri(cwd);
-		}
+	get pathWithoutDevice() {
+		return (this.path.split(':'))[1];
+	}
 
-		getDevice(name: string) {
-			var device = this.devices[name];
-			if (!device) throw(new Error(sprintf("Can't find device '%s'", name)));
-			return device;
-		}
+	get isAbsolute() {
+		return this.path.contains(':');
+	}
 
-		open(name: string, flags: hle.vfs.FileOpenFlags, mode: hle.vfs.FileMode) {
-			var uri = this.cwd.append(new Uri(name));
-			var entry = this.getDevice(uri.device).open(uri, flags, mode);
-			return new HleFile(entry);
-		}
+	append(that: Uri) {
+		if (that.isAbsolute) return that;
+		return new Uri(this.path + '/' + that.path);
+	}
+}
 
-		mount(device: string, vfs: hle.vfs.Vfs) {
-			this.devices[device] = new Device(device, vfs);
-		}
+export class FileManager {
+	private devices: StringDictionary<Device> = {};
+	cwd: Uri = new Uri('');
+
+	chdir(cwd:string) {
+		this.cwd = new Uri(cwd);
+	}
+
+	getDevice(name: string) {
+		var device = this.devices[name];
+		if (!device) throw(new Error(sprintf("Can't find device '%s'", name)));
+		return device;
+	}
+
+	open(name: string, flags: vfs.FileOpenFlags, mode: vfs.FileMode) {
+		var uri = this.cwd.append(new Uri(name));
+		var entry = this.getDevice(uri.device).open(uri, flags, mode);
+		return new HleFile(entry);
+	}
+
+	mount(device: string, vfs: vfs.Vfs) {
+		this.devices[device] = new Device(device, vfs);
 	}
 }

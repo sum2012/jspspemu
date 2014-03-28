@@ -1,5 +1,4 @@
-﻿var format;
-(function (format) {
+﻿define(["require", "exports"], function(require, exports) {
     function detectFormatAsync(asyncStream) {
         return asyncStream.readChunkAsync(0, 4).then(function (data) {
             var stream = Stream.fromArrayBuffer(data);
@@ -28,6 +27,6 @@
             throw (sprintf("Unknown format. Magic: '%s'", magic));
         });
     }
-    format.detectFormatAsync = detectFormatAsync;
-})(format || (format = {}));
+    exports.detectFormatAsync = detectFormatAsync;
+});
 //# sourceMappingURL=format.js.map
