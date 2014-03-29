@@ -1,12 +1,14 @@
 ﻿import CpuInstructions = require('./cpu/instructions');
 import Interop = require('./cpu/interop');
-import Syscall = require('./cpu/syscall');
 import Assembler = require('./cpu/assembler');
+import cpu_state = require('./cpu/state');
+import Syscall = require('./cpu/syscall');
 
-export import ISyscallManager = Syscall.ISyscallManager;
+export import ISyscallManager = cpu_state.ISyscallManager;
+export import CpuState = cpu_state.CpuState;
+
+export import NativeFunction = Syscall.NativeFunction;
 export import SyscallManager = Syscall.SyscallManager;
-
-export import CpuState = require('./cpu/state');
 
 export import CpuSpecialAddresses = Interop.CpuSpecialAddresses;
 export import CpuBreakException = Interop.CpuBreakException;
@@ -14,6 +16,7 @@ export import CpuBreakException = Interop.CpuBreakException;
 export import Instruction = CpuInstructions.Instruction;
 export import Instructions = CpuInstructions.Instructions;
 export import DecodedInstruction = CpuInstructions.DecodedInstruction;
+export import InstructionReader = CpuInstructions.InstructionReader;
 
 export import FunctionGenerator = require('./cpu/function_generator');
 export import InstructionCache = require('./cpu/instruction_cache');

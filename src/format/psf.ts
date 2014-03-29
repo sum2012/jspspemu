@@ -1,4 +1,8 @@
-﻿import struct = require('../util/struct');
+﻿import stream = require('../util/stream');
+import struct = require('../util/struct');
+
+import AsyncStream = stream.AsyncStream;
+import Stream = stream.Stream;
 
 enum DataType {
 	Binary = 0,

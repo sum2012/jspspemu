@@ -1,4 +1,7 @@
-﻿define(["require", "exports", './interop'], function(require, exports, Interop) {
+﻿define(["require", "exports", './interop', '../../util/math'], function(require, exports, Interop, math) {
+    var BitUtils = math.BitUtils;
+    var MathFloat = math.MathFloat;
+
     var CpuState = (function () {
         function CpuState(memory, syscallManager) {
             this.memory = memory;
@@ -316,8 +319,6 @@
         CpuState.LwlShift = [24, 16, 8, 0];
         return CpuState;
     })();
-
-    
-    return CpuState;
+    exports.CpuState = CpuState;
 });
 //# sourceMappingURL=state.js.map

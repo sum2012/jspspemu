@@ -1,8 +1,11 @@
-﻿define(["require", "exports", './cpu/state', './cpu/function_generator', './cpu/instruction_cache'], function(require, exports, CpuState, FunctionGenerator, InstructionCache) {
+﻿define(["require", "exports", './cpu/function_generator', './cpu/instruction_cache'], function(require, exports, FunctionGenerator, InstructionCache) {
+    var CpuState = cpu_state.CpuState;
+    exports.CpuState = CpuState;
+
+    var NativeFunction = Syscall.NativeFunction;
+    exports.NativeFunction = NativeFunction;
     var SyscallManager = Syscall.SyscallManager;
     exports.SyscallManager = SyscallManager;
-
-    exports.CpuState = CpuState;
 
     var CpuSpecialAddresses = Interop.CpuSpecialAddresses;
     exports.CpuSpecialAddresses = CpuSpecialAddresses;
@@ -15,6 +18,8 @@
     exports.Instructions = Instructions;
     var DecodedInstruction = CpuInstructions.DecodedInstruction;
     exports.DecodedInstruction = DecodedInstruction;
+    var InstructionReader = CpuInstructions.InstructionReader;
+    exports.InstructionReader = InstructionReader;
 
     exports.FunctionGenerator = FunctionGenerator;
     exports.InstructionCache = InstructionCache;

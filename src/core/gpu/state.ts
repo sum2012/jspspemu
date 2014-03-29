@@ -1,6 +1,10 @@
 ﻿import Memory = require('../memory');
 import display = require('../display');
 
+import math = require('../../util/math');
+import BitUtils = math.BitUtils;
+import MathUtils = math.MathUtils;
+
 export interface IDrawDriver {
 	//clear();
 	//prim(primitiveType:GuPrimitiveType, vertexCount: number, );

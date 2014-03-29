@@ -4,12 +4,12 @@
             var vertexState = new core.gpu.VertexState();
             vertexState.size = 10;
 
-            vertexState.texture = 0 /* Void */;
-            vertexState.color = 0 /* Void */;
-            vertexState.normal = 0 /* Void */;
-            vertexState.position = 2 /* Short */;
-            vertexState.weight = 0 /* Void */;
-            vertexState.index = 0 /* Void */;
+            vertexState.texture = core.gpu.NumericEnum.Void;
+            vertexState.color = core.gpu.ColorEnum.Void;
+            vertexState.normal = core.gpu.NumericEnum.Void;
+            vertexState.position = core.gpu.NumericEnum.Short;
+            vertexState.weight = core.gpu.NumericEnum.Void;
+            vertexState.index = core.gpu.IndexEnum.Void;
             vertexState.weightCount = 1;
             vertexState.morphingVertexCount = 1;
             vertexState.transform2D = true;

@@ -1,4 +1,6 @@
 ﻿import Memory = require('./memory');
+import math = require('../util/math');
+import BitUtils = math.BitUtils;
 
 export interface IPspDisplay {
 	address: number;

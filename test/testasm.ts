@@ -1,6 +1,14 @@
-﻿///<reference path="../typings/chai/chai.d.ts" />
-///<reference path="../typings/mocha/mocha.d.ts" />
-///<reference path="../typings/jquery/jquery.d.ts" />
+﻿import Memory = require('../src/core/memory');
+import cpu = require('../src/core/cpu');
+
+import MipsAssembler = cpu.MipsAssembler;
+import MipsDisassembler = cpu.MipsDisassembler;
+import ISyscallManager = cpu.ISyscallManager;
+import CpuState = cpu.CpuState;
+import InstructionCache = cpu.InstructionCache;
+import ProgramExecutor = cpu.ProgramExecutor;
+
+export function test() { }
 
 interface Assert {
     equal<T>(a:T, b:T, message?:string);
@@ -8,12 +16,12 @@ interface Assert {
 
 declare var assert: Assert;
 
-var assembler = new core.cpu.MipsAssembler();
-var disassembler = new core.cpu.MipsDisassembler();
-var memory = new core.Memory();
+var assembler = new MipsAssembler();
+var disassembler = new MipsDisassembler();
+var memory = new Memory();
 
-class TestSyscallManager implements core.ISyscallManager {
-	call(state: core.cpu.CpuState, id: number) {
+class TestSyscallManager implements ISyscallManager {
+	call(state: CpuState, id: number) {
     }
 }
 
@@ -21,9 +29,9 @@ function executeProgram(gprInitial: any, program: string[]) {
     program = program.slice();
     program.push('dbreak');
     assembler.assembleToMemory(memory, 4, program);
-	var state = new core.cpu.CpuState(memory, new TestSyscallManager());
+	var state = new cpu.CpuState(memory, new TestSyscallManager());
     var instructionCache = new InstructionCache(memory);
-    var programExecuter = new ProgramExecutor(state, instructionCache);
+	var programExecuter = new ProgramExecutor(state, instructionCache);
 
 	for (var key in gprInitial) {
 		if (key.substr(0, 1) == '$') {

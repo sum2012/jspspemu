@@ -1,4 +1,7 @@
-﻿define(["require", "exports", '../display'], function(require, exports, display) {
+﻿define(["require", "exports", '../display', '../../util/math'], function(require, exports, display, math) {
+    var BitUtils = math.BitUtils;
+    var MathUtils = math.MathUtils;
+
     (function (SyncType) {
         SyncType[SyncType["ListDone"] = 0] = "ListDone";
         SyncType[SyncType["ListQueued"] = 1] = "ListQueued";

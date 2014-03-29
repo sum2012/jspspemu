@@ -1,6 +1,10 @@
 ﻿import EmulatorContext = require('../../context');
 import utils = require('../utils');
+import display = require('../../core/display');
+import stream = require('../../util/stream');
+import Stream = stream.Stream;
 import createNativeFunction = utils.createNativeFunction;
+import PixelFormat = display.PixelFormat;
 
 export class sceDisplay {
     constructor(private context: EmulatorContext) { }
@@ -30,7 +34,7 @@ export class sceDisplay {
 		return this.context.display.waitVblankAsync();
 	});
 
-    sceDisplaySetFrameBuf = createNativeFunction(0x289D82FE, 150, 'uint', 'uint/int/uint/uint', this, (address: number, bufferWidth: number, pixelFormat: core.PixelFormat, sync: number) => {
+    sceDisplaySetFrameBuf = createNativeFunction(0x289D82FE, 150, 'uint', 'uint/int/uint/uint', this, (address: number, bufferWidth: number, pixelFormat: PixelFormat, sync: number) => {
         this.context.display.address = address;
         this.context.display.bufferWidth = bufferWidth;
         this.context.display.pixelFormat = pixelFormat;

@@ -1,4 +1,8 @@
-﻿define(["require", "exports", 'gpu/opcodes', 'gpu/state', 'gpu/gpu_webgl'], function(require, exports, GpuOpcodes, State, WebGlPspDrawDriver) {
+﻿define(["require", "exports", 'gpu/opcodes', 'gpu/state', '../util/math', '../util/indent', 'gpu/gpu_webgl'], function(require, exports, GpuOpcodes, State, math_util, IndentStringGenerator, WebGlPspDrawDriver) {
+    var BitUtils = math_util.BitUtils;
+    var MathFloat = math_util.MathFloat;
+    var MathUtils = math_util.MathUtils;
+
     var Vertex = State.Vertex;
 
     var ColorEnum = State.ColorEnum;

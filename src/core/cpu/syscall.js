@@ -1,4 +1,7 @@
 ﻿define(["require", "exports"], function(require, exports) {
+    var CpuState = cpu_state.CpuState;
+    exports.CpuState = CpuState;
+
     var NativeFunction = (function () {
         function NativeFunction() {
         }

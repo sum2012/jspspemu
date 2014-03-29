@@ -2,6 +2,14 @@
 import Display = require('./display');
 import GpuOpcodes = require('gpu/opcodes');
 import State = require('gpu/state');
+import math_util = require('../util/math');
+import stream = require('../util/stream');
+import IndentStringGenerator = require('../util/indent');
+
+import Stream = stream.Stream;
+import BitUtils = math_util.BitUtils;
+import MathFloat = math_util.MathFloat;
+import MathUtils = math_util.MathUtils;
 
 import WebGlPspDrawDriver = require('gpu/gpu_webgl');
 

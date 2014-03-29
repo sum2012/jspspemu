@@ -1,4 +1,8 @@
-﻿export interface IType {
+﻿import stream = require('./stream');
+import Stream = stream.Stream;
+import Endian = stream.Endian;
+
+export interface IType {
 	read(stream: Stream): any;
 	write(stream: Stream, value: any): void;
 	length: number;

@@ -1,9 +1,9 @@
 ﻿import EmulatorContext = require('../../context');
 import utils = require('../utils');
+import stream = require('../../util/stream');
+import Stream = stream.Stream;
 import createNativeFunction = utils.createNativeFunction;
-
 import controller = require('../../core/controller');
-
 import SceCtrlData = controller.SceCtrlData;
 
 export class sceCtrl {

@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceWlanDrv = (function () {
-            function sceWlanDrv(context) {
-                this.context = context;
-            }
-            return sceWlanDrv;
-        })();
-        modules.sceWlanDrv = sceWlanDrv;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceWlanDrv = (function () {
+        function sceWlanDrv(context) {
+            this.context = context;
+        }
+        return sceWlanDrv;
+    })();
+    exports.sceWlanDrv = sceWlanDrv;
+});
 //# sourceMappingURL=sceWlanDrv.js.map

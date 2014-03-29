@@ -1,6 +1,9 @@
 ﻿import EmulatorContext = require('../../context');
 import utils = require('../utils');
+import stream = require('../../util/stream');
+import Stream = stream.Stream;
 import createNativeFunction = utils.createNativeFunction;
+import audio = require('../../core/audio');
 
 enum AudioFormat {
 	Stereo = 0x00,
@@ -11,7 +14,7 @@ class Channel {
 	allocated: boolean = false;
 	sampleCount: number = 44100;
 	format: AudioFormat = AudioFormat.Stereo;
-	channel: core.PspAudioChannel;
+	channel: audio.PspAudioChannel;
 
 	constructor(public id: number) {
 	}
@@ -52,12 +55,12 @@ export class sceAudio {
 
 	sceAudioOutputPannedBlocking = createNativeFunction(0x13F592BC, 150, 'uint', 'int/int/int/void*', this, (channelId: number, leftVolume: number, rightVolume: number, buffer: Stream) => {
 		var channel = this.channels[channelId];
-		return channel.channel.playAsync(core.PspAudio.convertS16ToF32(buffer.readInt16Array(2 * channel.sampleCount)));
+		return channel.channel.playAsync(audio.PspAudio.convertS16ToF32(buffer.readInt16Array(2 * channel.sampleCount)));
 	});
 
 	sceAudioOutputBlocking = createNativeFunction(0x136CAF51, 150, 'uint', 'int/int/void*', this, (channelId: number, volume: number, buffer: Stream) => {
 		var channel = this.channels[channelId];
-		return channel.channel.playAsync(core.PspAudio.convertS16ToF32(buffer.readInt16Array(2 * channel.sampleCount)));
+		return channel.channel.playAsync(audio.PspAudio.convertS16ToF32(buffer.readInt16Array(2 * channel.sampleCount)));
 	});
 
 	sceAudioChangeChannelVolume = createNativeFunction(0xB7E1D8E7, 150, 'uint', 'int/int/int', this, (channelId: number, volumeLeft: number, volumeRight: number) => {

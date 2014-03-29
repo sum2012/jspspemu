@@ -1,1 +1,1 @@
-{"version":3,"file":"sceNetInet.js","sourceRoot":"","sources":["sceNetInet.ts"],"names":["sceNetInet","sceNetInet.constructor"],"mappings":"AAAA;IAIA;QACCA,oBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,kBAACA;IAADA,CAACA,IAAA;IAFD,gCAEC;GACD"}
+{"version":3,"file":"sceNetInet.js","sourceRoot":"","sources":["sceNetInet.ts"],"names":["sceNetInet","sceNetInet.constructor"],"mappings":"AAAA;IAMA;QACCA,oBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,kBAACA;IAADA,CAACA,IAAA;IAFD,gCAEC;GACD"}

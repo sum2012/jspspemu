@@ -1,4 +1,6 @@
-﻿define(["require", "exports"], function(require, exports) {
+﻿define(["require", "exports", '../util/stream'], function(require, exports, stream) {
+    var Stream = stream.Stream;
+
     function detectFormatAsync(asyncStream) {
         return asyncStream.readChunkAsync(0, 4).then(function (data) {
             var stream = Stream.fromArrayBuffer(data);

@@ -67,7 +67,7 @@ export class Thread {
 }
 
 export class ThreadManager {
-    threads: DSet<Thread> = new DSet<Thread>();
+	threads: SortedSet<Thread> = new SortedSet<Thread>();
     interval: number = -1;
 	enqueued: boolean = false;
 	running: boolean = false;

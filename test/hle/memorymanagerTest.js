@@ -4,9 +4,9 @@
         assert.equal(partition.getMaxContiguousFreeMemory(), 100);
         assert.equal(partition.getTotalFreeMemory(), 100);
 
-        var p1 = partition.allocate(25, 0 /* Low */);
-        var p2 = partition.allocate(25, 0 /* Low */);
-        var p3 = partition.allocate(25, 0 /* Low */);
+        var p1 = partition.allocate(25, hle.MemoryAnchor.Low);
+        var p2 = partition.allocate(25, hle.MemoryAnchor.Low);
+        var p3 = partition.allocate(25, hle.MemoryAnchor.Low);
 
         assert.equal(partition.getMaxContiguousFreeMemory(), 25);
         assert.equal(partition.getTotalFreeMemory(), 25);

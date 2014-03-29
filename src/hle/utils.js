@@ -1,4 +1,8 @@
-﻿define(["require", "exports"], function(require, exports) {
+﻿define(["require", "exports", '../core/cpu', '../util/math'], function(require, exports, cpu, math) {
+    var MathUtils = math.MathUtils;
+
+    var NativeFunction = cpu.NativeFunction;
+
     function createNativeFunction(exportId, firmwareVersion, retval, arguments, _this, internalFunc) {
         var code = '';
 
@@ -6,7 +10,7 @@
         var argindex = 4;
 
         function readGpr32() {
-            return 'state.' + core.cpu.CpuState.getGprAccessName(argindex++);
+            return 'state.gpr[' + argindex++ + ']';
         }
 
         function readGpr64() {
@@ -71,7 +75,7 @@
                 throw ('Invalid return value "' + retval + '"');
         }
 
-        var out = new core.NativeFunction();
+        var out = new NativeFunction();
         out.name = 'unknown';
         out.nid = exportId;
         out.firmwareVersion = firmwareVersion;

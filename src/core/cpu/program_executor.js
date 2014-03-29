@@ -1,4 +1,4 @@
-﻿define(["require", "exports"], function(require, exports) {
+﻿define(["require", "exports", './interop'], function(require, exports, Interop) {
     var ProgramExecutor = (function () {
         function ProgramExecutor(state, instructionCache) {
             this.state = state;
@@ -23,7 +23,7 @@
                         maxIterations--;
                 }
             } catch (e) {
-                if (!(e instanceof CpuBreakException)) {
+                if (!(e instanceof Interop.CpuBreakException)) {
                     console.log(this.state);
                     throw (e);
                 }

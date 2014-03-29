@@ -1,4 +1,8 @@
-﻿define(["require", "exports", '../util/struct'], function(require, exports, struct) {
+﻿define(["require", "exports", '../util/stream', '../util/struct', '../util/math'], function(require, exports, stream, struct, math_utils) {
+    var Stream = stream.Stream;
+
+    var MathUtils = math_utils.MathUtils;
+
     var SECTOR_SIZE = 0x800;
 
     var DirectoryRecordDate = (function () {

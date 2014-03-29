@@ -1,1 +1,1 @@
-{"version":3,"file":"sceNetResolver.js","sourceRoot":"","sources":["sceNetResolver.ts"],"names":["sceNetResolver","sceNetResolver.constructor"],"mappings":"AAAA;IAIA;QACCA,wBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,sBAACA;IAADA,CAACA,IAAA;IAFD,wCAEC;GACD"}
+{"version":3,"file":"sceNetResolver.js","sourceRoot":"","sources":["sceNetResolver.ts"],"names":["sceNetResolver","sceNetResolver.constructor"],"mappings":"AAAA;IAMA;QACCA,wBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,sBAACA;IAADA,CAACA,IAAA;IAFD,wCAEC;GACD"}

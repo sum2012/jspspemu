@@ -1,4 +1,10 @@
-﻿import struct = require('../util/struct');
+﻿import stream = require('../util/stream');
+import AsyncStream = stream.AsyncStream;
+import Stream = stream.Stream;
+import struct = require('../util/struct');
+
+import math_utils = require('../util/math');
+import MathUtils = math_utils.MathUtils;
 
 var SECTOR_SIZE = 0x800;
 
@@ -236,7 +242,7 @@ export class Iso implements AsyncStream {
     get childrenByPath(): StringDictionary<IIsoNode> { return this._childrenByPath; }
     get children(): IIsoNode[]{ return this._children.slice(); }
 
-    static fromStreamAsync(asyncStream: AsyncStream) {
+	static fromStreamAsync(asyncStream: AsyncStream) {
         return new Iso().loadAsync(asyncStream);
 	}
 
@@ -256,7 +262,7 @@ export class Iso implements AsyncStream {
 		return this.asyncStream.readChunkAsync(offset, count);
 	}
 
-    loadAsync(asyncStream: AsyncStream): Promise<Iso> {
+	loadAsync(asyncStream: AsyncStream): Promise<Iso> {
         this.asyncStream = asyncStream;
 
         if (PrimaryVolumeDescriptor.struct.length != SECTOR_SIZE) throw (sprintf("Invalid PrimaryVolumeDescriptor.struct size %d != %d", PrimaryVolumeDescriptor.struct.length, SECTOR_SIZE));

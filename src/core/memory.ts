@@ -1,4 +1,10 @@
-﻿class Memory {
+﻿import stream = require('../util/stream');
+import math = require('../util/math');
+
+import Stream = stream.Stream;
+import BitUtils = math.BitUtils;
+
+class Memory {
 	buffer: ArrayBuffer;
 	s8: Uint8Array;
 	u8: Uint8Array;

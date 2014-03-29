@@ -1,4 +1,9 @@
-﻿import struct = require('../util/struct');
+﻿import stream = require('../util/stream');
+import AsyncStream = stream.AsyncStream;
+import Stream = stream.Stream;
+import struct = require('../util/struct');
+import math_util = require('../util/math');
+import MathUtils = math_util.MathUtils;
 
 var CSO_MAGIC = 'CISO';
 

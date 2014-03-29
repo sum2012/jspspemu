@@ -1,4 +1,6 @@
-﻿define(["require", "exports"], function(require, exports) {
+﻿define(["require", "exports", './stream'], function(require, exports, stream) {
+    var Endian = stream.Endian;
+
     var Int64Type = (function () {
         function Int64Type(endian) {
             this.endian = endian;

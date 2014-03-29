@@ -1,4 +1,6 @@
-﻿define(["require", "exports"], function(require, exports) {
+﻿define(["require", "exports", '../../util/indent', '../../util/math'], function(require, exports, IndentStringGenerator, math) {
+    var BitUtils = math.BitUtils;
+
     var ADDR_TYPE_NONE = 0;
     var ADDR_TYPE_REG = 1;
     var ADDR_TYPE_16 = 2;

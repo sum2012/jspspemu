@@ -73,7 +73,7 @@
             this.display = display;
             this.syscallManager = syscallManager;
             this.instructionCache = instructionCache;
-            this.threads = new DSet();
+            this.threads = new SortedSet();
             this.interval = -1;
             this.enqueued = false;
             this.running = false;

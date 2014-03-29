@@ -1,17 +1,33 @@
 ﻿import struct = require('../util/struct');
 import Memory = require('../core/memory');
+import cpu = require('../core/cpu');
 import instructions = require('../core/cpu/instructions');
 import EmulatorContext = require('../context');
 import assembler = require('../core/cpu/assembler');
 import CpuState = require('../core/cpu/state');
 import elf = require('../format/elf');
+import memorymanager = require('./memorymanager');
+import modulemanager = require('./modulemanager');
+
+import MemoryManager = memorymanager.MemoryManager;
+import MemoryPartition = memorymanager.MemoryPartition;
+import ModuleManager = modulemanager.ModuleManager;
+
 import Instruction = instructions.Instruction;
 import MipsAssembler = assembler.MipsAssembler;
+
+import InstructionReader = cpu.InstructionReader;
+import NativeFunction = cpu.NativeFunction;
+import ISyscallManager = cpu.ISyscallManager;
+import SyscallManager = cpu.SyscallManager;
 
 import ElfRelocType = elf.ElfRelocType;
 import ElfSectionHeaderFlags = elf.ElfSectionHeaderFlags;
 import ElfLoader = elf.ElfLoader;
-
+import ElfSectionHeaderType = elf.ElfSectionHeaderType;
+import ElfProgramHeaderType = elf.ElfProgramHeaderType;
+import ElfSectionHeader = elf.ElfSectionHeader;
+import ElfReloc = elf.ElfReloc;
 
 export class ElfPspModuleInfo {
 	moduleAtributes: number;
@@ -45,7 +61,7 @@ export class PspElfLoader {
 	baseAddress: number = 0;
 	partition: MemoryPartition;
 
-	constructor(private memory: Memory, private memoryManager: MemoryManager, private moduleManager: hle.ModuleManager, private syscallManager: core.SyscallManager) {
+	constructor(private memory: Memory, private memoryManager: MemoryManager, private moduleManager: ModuleManager, private syscallManager: SyscallManager) {
     }
 
     load(stream: Stream) {
@@ -227,12 +243,12 @@ export class PspElfLoader {
         var callStream = this.memory.sliceWithSize(moduleImport.callAddress, moduleImport.functionCount * 8);
 
         var registerN = (nid: number, n: number) => {
-            var nfunc: core.NativeFunction;
+            var nfunc: NativeFunction;
             try {
                 nfunc = _module.getByNid(nid)
             } catch (e) {
                 console.warn(e);
-				nfunc = new core.NativeFunction();
+				nfunc = new NativeFunction();
                 nfunc.name = sprintf("%s:0x%08X", moduleImport.name, nid);
                 nfunc.nid = nid;
                 nfunc.firmwareVersion = 150;

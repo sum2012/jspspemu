@@ -1,9 +1,18 @@
-﻿define(["require", "exports", '../util/struct', '../core/cpu/assembler', '../format/elf'], function(require, exports, struct, assembler, elf) {
+﻿define(["require", "exports", '../util/struct', '../core/cpu', '../core/cpu/assembler', '../format/elf'], function(require, exports, struct, cpu, assembler, elf) {
     var MipsAssembler = assembler.MipsAssembler;
+
+    var InstructionReader = cpu.InstructionReader;
+    var NativeFunction = cpu.NativeFunction;
+
+    var SyscallManager = cpu.SyscallManager;
 
     var ElfRelocType = elf.ElfRelocType;
     var ElfSectionHeaderFlags = elf.ElfSectionHeaderFlags;
     var ElfLoader = elf.ElfLoader;
+    var ElfSectionHeaderType = elf.ElfSectionHeaderType;
+    var ElfProgramHeaderType = elf.ElfProgramHeaderType;
+
+    var ElfReloc = elf.ElfReloc;
 
     var ElfPspModuleInfo = (function () {
         function ElfPspModuleInfo() {
@@ -69,10 +78,10 @@
             var RelocProgramIndex = 0;
             this.elfLoader.programHeaders.forEach(function (programHeader) {
                 switch (programHeader.type) {
-                    case ElfProgramHeaderType.Reloc1:
+                    case 1879048352 /* Reloc1 */:
                         console.warn("SKIPPING Elf.ProgramHeader.TypeEnum.Reloc1!");
                         break;
-                    case ElfProgramHeaderType.Reloc2:
+                    case 1879048353 /* Reloc2 */:
                         throw ("Not implemented");
                 }
             });
@@ -80,7 +89,7 @@
             var RelocSectionIndex = 0;
             this.elfLoader.sectionHeaders.forEach(function (sectionHeader) {
                 switch (sectionHeader.type) {
-                    case ElfSectionHeaderType.Relocation:
+                    case 9 /* Relocation */:
                         console.log(sectionHeader);
                         console.error("Not implemented ElfSectionHeaderType.Relocation");
                         break;
@@ -178,18 +187,18 @@
 
             //console.log(moduleInfo);
             this.elfLoader.sectionHeaders.filter(function (sectionHeader) {
-                return ((sectionHeader.flags & ElfSectionHeaderFlags.Allocate) != 0);
+                return ((sectionHeader.flags & 2 /* Allocate */) != 0);
             }).forEach(function (sectionHeader) {
                 var low = loadAddress + sectionHeader.address;
 
                 switch (sectionHeader.type) {
-                    case ElfSectionHeaderType.NoBits:
+                    case 8 /* NoBits */:
                         for (var n = 0; n < sectionHeader.size; n++)
                             _this.memory.writeInt8(low + n, 0);
                         break;
                     default:
                         break;
-                    case ElfSectionHeaderType.ProgramBits:
+                    case 1 /* ProgramBits */:
                         var stream = sectionHeader.stream;
 
                         var length = stream.length;
@@ -232,7 +241,7 @@
                     nfunc = _module.getByNid(nid);
                 } catch (e) {
                     console.warn(e);
-                    nfunc = new core.NativeFunction();
+                    nfunc = new NativeFunction();
                     nfunc.name = sprintf("%s:0x%08X", moduleImport.name, nid);
                     nfunc.nid = nid;
                     nfunc.firmwareVersion = 150;

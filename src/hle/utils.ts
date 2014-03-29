@@ -1,11 +1,19 @@
-﻿export function createNativeFunction(exportId: number, firmwareVersion: number, retval: string, arguments: string, _this: any, internalFunc: Function) {
+﻿import EmulatorContext = require('../context');
+import cpu = require('../core/cpu');
+import math = require('../util/math');
+
+import MathUtils = math.MathUtils;
+import CpuState = cpu.CpuState;
+import NativeFunction = cpu.NativeFunction;
+
+export function createNativeFunction(exportId: number, firmwareVersion: number, retval: string, arguments: string, _this: any, internalFunc: Function) {
     var code = '';
 
     var args = [];
     var argindex = 4;
 
     function readGpr32() {
-		return 'state.' + core.cpu.CpuState.getGprAccessName(argindex++);
+		return 'state.gpr[' + argindex++ + ']';
     }
 
 	function readGpr64() {
@@ -44,16 +52,15 @@
         default: throw ('Invalid return value "' + retval + '"');
     }
 
-    var out = new core.NativeFunction();
+    var out = new NativeFunction();
     out.name = 'unknown';
     out.nid = exportId;
     out.firmwareVersion = firmwareVersion;
     //console.log(code);
     var func = <any>new Function('_this', 'internalFunc', 'context', 'state', code);
-	out.call = (context: EmulatorContext, state: core.cpu.CpuState) => {
+	out.call = (context: EmulatorContext, state: CpuState) => {
         func(_this, internalFunc, context, state);
     };
     //console.log(out);
     return out;
 }
-

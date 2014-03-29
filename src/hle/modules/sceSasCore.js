@@ -1,14 +1,10 @@
-﻿var hle;
-(function (hle) {
-    (function (modules) {
-        var sceSasCore = (function () {
-            function sceSasCore(context) {
-                this.context = context;
-            }
-            return sceSasCore;
-        })();
-        modules.sceSasCore = sceSasCore;
-    })(hle.modules || (hle.modules = {}));
-    var modules = hle.modules;
-})(hle || (hle = {}));
+﻿define(["require", "exports"], function(require, exports) {
+    var sceSasCore = (function () {
+        function sceSasCore(context) {
+            this.context = context;
+        }
+        return sceSasCore;
+    })();
+    exports.sceSasCore = sceSasCore;
+});
 //# sourceMappingURL=sceSasCore.js.map

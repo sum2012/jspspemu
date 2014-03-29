@@ -1,9 +1,14 @@
 ﻿import Memory = require('../memory');
-import syscall = require('../syscall');
 import Interop = require('./interop');
-import ISyscallManager = syscall.ISyscallManager;
+import math = require('../../util/math');
+import BitUtils = math.BitUtils;
+import MathFloat = math.MathFloat;
 
-class CpuState {
+export interface ISyscallManager {
+	call(state: CpuState, id: number);
+}
+
+export class CpuState {
 	gpr: Int32Array = new Int32Array(32);
 	fpr: Float32Array = new Float32Array(32);
 	//fpr: Float64Array = new Float64Array(32);
@@ -209,5 +214,3 @@ class CpuState {
 		console.log('break!');
 	}
 }
-
-export = CpuState;

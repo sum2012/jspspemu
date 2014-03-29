@@ -1,1 +1,1 @@
-{"version":3,"file":"sceNet.js","sourceRoot":"","sources":["sceNet.ts"],"names":["sceNet","sceNet.constructor"],"mappings":"AAAA;IAIA;QACCA,gBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,cAACA;IAADA,CAACA,IAAA;IAFD,wBAEC;GACD"}
+{"version":3,"file":"sceNet.js","sourceRoot":"","sources":["sceNet.ts"],"names":["sceNet","sceNet.constructor"],"mappings":"AAAA;IAMA;QACCA,gBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,cAACA;IAADA,CAACA,IAAA;IAFD,wBAEC;GACD"}

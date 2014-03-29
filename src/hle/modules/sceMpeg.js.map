@@ -1,1 +1,1 @@
-{"version":3,"file":"sceMpeg.js","sourceRoot":"","sources":["sceMpeg.ts"],"names":["sceMpeg","sceMpeg.constructor"],"mappings":"AAAA;IAIA;QACCA,iBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,eAACA;IAADA,CAACA,IAAA;IAFD,0BAEC;GACD"}
+{"version":3,"file":"sceMpeg.js","sourceRoot":"","sources":["sceMpeg.ts"],"names":["sceMpeg","sceMpeg.constructor"],"mappings":"AAAA;IAMA;QACCA,iBAAYA,OAAgCA;YAAhCC,YAAeA,GAAPA,OAAOA;AAAiBA,QAAIA,CAACA;QAClDD,eAACA;IAADA,CAACA,IAAA;IAFD,0BAEC;GACD"}

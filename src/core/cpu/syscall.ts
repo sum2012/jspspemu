@@ -1,8 +1,6 @@
-﻿import CpuState = require('./state');
+﻿import cpu_state = require('./state');
 
-export interface ISyscallManager {
-	call(state: CpuState, id: number);
-}
+export import CpuState = cpu_state.CpuState;
 
 export class NativeFunction {
 	name: string;
@@ -11,7 +9,7 @@ export class NativeFunction {
 	call: (emulatorContext: any, state: CpuState) => void;
 }
 	
-export class SyscallManager implements ISyscallManager {
+export class SyscallManager {
     private calls: any = {};
     private lastId: number = 1;
 

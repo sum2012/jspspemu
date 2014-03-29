@@ -1,4 +1,8 @@
-﻿define(["require", "exports", '../util/struct'], function(require, exports, struct) {
+﻿define(["require", "exports", '../util/stream', '../util/struct', '../util/math'], function(require, exports, stream, struct, math_util) {
+    var Stream = stream.Stream;
+
+    var MathUtils = math_util.MathUtils;
+
     var CSO_MAGIC = 'CISO';
 
     var Header = (function () {

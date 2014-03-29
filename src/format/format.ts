@@ -1,4 +1,6 @@
-﻿
+﻿import stream = require('../util/stream');
+import AsyncStream = stream.AsyncStream;
+import Stream = stream.Stream;
 
 export function detectFormatAsync(asyncStream: AsyncStream): Promise<string> {
 	return asyncStream.readChunkAsync(0, 4).then((data):any => {

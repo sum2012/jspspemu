@@ -4,7 +4,9 @@
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", './memory'], function(require, exports, Memory) {
+define(["require", "exports", './memory', '../util/math'], function(require, exports, Memory, math) {
+    var BitUtils = math.BitUtils;
+
     (function (PixelFormat) {
         PixelFormat[PixelFormat["NONE"] = -1] = "NONE";
         PixelFormat[PixelFormat["RGBA_5650"] = 0] = "RGBA_5650";

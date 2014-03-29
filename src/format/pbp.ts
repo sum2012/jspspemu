@@ -1,4 +1,7 @@
-﻿import struct = require('../util/struct');
+﻿import stream = require('../util/stream');
+import AsyncStream = stream.AsyncStream;
+import Stream = stream.Stream;
+import struct = require('../util/struct');
 
 enum PbpMagic {
 	expected = 0x50425000,

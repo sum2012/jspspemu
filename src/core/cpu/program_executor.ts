@@ -1,4 +1,8 @@
-﻿export class ProgramExecutor {
+﻿import CpuState = require('./state');
+import InstructionCache = require('./instruction_cache');
+import Interop = require('./interop');
+
+export class ProgramExecutor {
 	private lastPC = 0;
 
 	constructor(public state: CpuState, public instructionCache: InstructionCache) {
@@ -20,7 +24,7 @@
 				if (maxIterations > 0) maxIterations--;
 			}
 		} catch (e) {
-			if (!(e instanceof CpuBreakException)) {
+			if (!(e instanceof Interop.CpuBreakException)) {
 				console.log(this.state);
 				throw (e);
 			}

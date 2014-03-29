@@ -1,4 +1,7 @@
 ﻿import Memory = require('../memory');
+import IndentStringGenerator = require('../../util/indent');
+import math = require('../../util/math');
+import BitUtils = math.BitUtils;
 
 export interface ValueMask {
 	value: number;

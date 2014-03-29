@@ -1,5 +1,6 @@
-﻿var hle;
-(function (hle) {
+﻿define(["require", "exports", '../core/cpu'], function(require, exports, cpu) {
+    var NativeFunction = cpu.NativeFunction;
+
     var ModuleWrapper = (function () {
         function ModuleWrapper(moduleName, _module) {
             this.moduleName = moduleName;
@@ -8,7 +9,7 @@
             this.nids = {};
             for (var key in _module) {
                 var item = _module[key];
-                if (item && item instanceof core.NativeFunction) {
+                if (item && item instanceof NativeFunction) {
                     var nativeFunction = item;
                     nativeFunction.name = key;
                     this.nids[nativeFunction.nid] = nativeFunction;
@@ -28,7 +29,7 @@
         };
         return ModuleWrapper;
     })();
-    hle.ModuleWrapper = ModuleWrapper;
+    exports.ModuleWrapper = ModuleWrapper;
 
     var ModuleManager = (function () {
         function ModuleManager(context) {
@@ -61,7 +62,7 @@
         };
         return ModuleManager;
     })();
-    hle.ModuleManager = ModuleManager;
+    exports.ModuleManager = ModuleManager;
 
     var ModuleManagerSyscalls = (function () {
         function ModuleManagerSyscalls() {
@@ -88,6 +89,6 @@
         };
         return ModuleManagerSyscalls;
     })();
-    hle.ModuleManagerSyscalls = ModuleManagerSyscalls;
-})(hle || (hle = {}));
+    exports.ModuleManagerSyscalls = ModuleManagerSyscalls;
+});
 //# sourceMappingURL=modulemanager.js.map

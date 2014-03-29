@@ -1,5 +1,10 @@
-﻿describe('instruction lookup', () => {
-	var instructions = core.cpu.Instructions.instance;
+﻿import instructions = require('../../../src/core/cpu/instructions');
+import Instructions = instructions.Instructions;
+
+export function test() { }
+
+describe('instruction lookup', () => {
+	var instructions = Instructions.instance;
 
     it('should accept locate instruction by name', () => {
         assert.equal(instructions.findByName('addi').name, 'addi');

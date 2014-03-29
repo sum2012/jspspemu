@@ -1,4 +1,6 @@
-﻿define(["require", "exports"], function(require, exports) {
+﻿define(["require", "exports", '../util/stream'], function(require, exports, stream) {
+    var Stream = stream.Stream;
+
     var Memory = (function () {
         function Memory() {
             this.buffer = new ArrayBuffer(0x10000000);
